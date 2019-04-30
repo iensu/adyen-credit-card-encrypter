@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Adyen Credit Card Encrypter</title>
+    <link rel='stylesheet' href='https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/2.1.0/adyen.css'>
+    <script src='https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/2.1.0/adyen.js'></script>
+  </head>
+  <body>
+    <div id="adyen-checkout"></div>
+    <div id="adyen-output"></div>
+    <script>
+     window.onload = () => {
+       if (!window.AdyenCheckout) {
+         console.log('Adyen checkout not loaded')
+       }
+
+       window.checkout = new window.AdyenCheckout({
+         locale: 'sv_SE',
+         context: 'test',
+         loadingContext: '',
+         originKey: '<%= config.WEBSHOP_CHECKOUT_PUBKEY %>',
+         cardGroupTypes: ['visa', 'mc', 'maestro']
+       });
+
+       window.checkout.create('card', {
+         onChange: function handleChange(state) {
+           if (!state.isValid) {
+             console.log('Not valid card details');
+           }
+
+           document.getElementById('adyen-output').innerHTML = JSON.stringify(state.data);
+         }
+
+       }).mount('#adyen-checkout')
+     }
+    </script>
+  </body>
+</html>
