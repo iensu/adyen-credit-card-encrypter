@@ -1,0 +1,30 @@
+{
+  "name": "adyen-credit-card-encrypter",
+  "version": "0.0.1",
+  "description": "Express server template",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "env-cmd .env nodemon -w src/ -w index.js --ext js index.js",
+    "lint": "eslint '**/*.js'",
+    "test": "env-cmd .env.test mocha --require 'test/test-setup.js' 'test/**/*.test.js'",
+    "posttest": "npm run lint",
+    "test:dev": "env-cmd .env.test mocha --require 'test/test-setup.js' 'test/**/*.test.js' --watch"
+  },
+  "author": "Jens Östlund",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "env-cmd": "^8.0.2",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4",
+    "sinon": "^7.3.1",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "winston": "^3.2.1"
+  }
+}
