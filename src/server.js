@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const config = require('./util/config.js');
+const logger = require('./util/logger.js');
 
 const createServer = () => {
   const app = express();
@@ -27,7 +28,14 @@ const createServer = () => {
       'utf-8'
     );
 
-    res.json(JSON.parse(contents));
+    try {
+      const result = JSON.parse(contents);
+
+      res.json(result);
+    } catch (err) {
+      logger.error(`Failed to parse credit card details: ${contents}`);
+      res.status(500).send('Was not able to read data from Adyen...');
+    }
   });
 
   return app;
