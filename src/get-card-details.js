@@ -20,7 +20,7 @@ module.exports = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto(`http://localhost:${config.PORT}/adyen`);
+    await page.goto(`${config.SERVICE_URL}/adyen`);
 
     const iframes = await page.$$('iframe');
 
