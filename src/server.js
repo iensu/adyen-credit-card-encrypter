@@ -29,9 +29,10 @@ const createServer = () => {
     );
 
     try {
-      const result = JSON.parse(contents);
+      // eslint-disable-next-line no-unused-vars
+      const { type, ...cardDetails } = JSON.parse(contents);
 
-      res.json(result);
+      res.json(cardDetails);
     } catch (err) {
       logger.error(`Failed to parse credit card details: ${contents}`);
       res.status(500).send('Was not able to read data from Adyen...');
