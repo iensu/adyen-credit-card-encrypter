@@ -1,43 +1,19 @@
-# Node.JS Express server template
+# Adyen Credit Card Encrypter
 
-A simple Express server template which comes with the following features:
+The purpose of this project is to provide a way of getting encrypted credit card details for Adyen's test cards.
 
-* [Express](https://expressjs.com/) server
-* Testing using [Mocha](https://mochajs.org/)
-* Logging using [Winston](https://github.com/winstonjs/winston)
-* Optional API protection using an API_KEY
-* Configuration via environment variables
-* `/liveness` endpoint for liveness/health check
-* Code linting using [Eslint](https://eslint.org/)
-* Code formatting using [Prettier](https://prettier.io/)
-* NPM scripts:
-  * `start` - Start the application
-  * `start:dev` - Start a server watching for code changes
-  * `test` - Run tests and linter
-  * `test:dev` - Run tests and watch for code changes
+When creating backend integration tests to Adyen we could not find a way of generating encrypted credit card details on the fly needed to test the purchase flow. As far as we could see the only way of acquiring encrypted details was to enter the card details into Adyen's iframe solution. The encrypted details also expire, so we also needed to update them before running tests.
 
-## How to use
+## Getting started
 
-1. Clone the project:
-   ```bash
-   $ git clone https://github.com/iensu/adyen-credit-card-encrypter my-project-name
-   ```
-1. Remove the Git history:
-   ```bash
-   $ cd my-project-name
-   $ rm -rf .git
-   ```
-1. Re-initialize git:
-   ```bash
-   $ git init
-   ```
-1. Update the project `name` field in [package.json](./package.json), [package-lock.json](./package-lock.json) and change the `author` field.
-1. Make an initial commit
-   ```bash
-   $ git commit -am "Initial commit"
-   ```
+1. Clone the project
+1. Inside the project directory run `npm install`
+1. Setup the required environment variables (see [.env.sample](.env.sample))
+1. Then run `npm run start:dev`
 
-## Acknowledgements
+## How it works
 
-This project is a grateful recipient of the
-[Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities).
+The API consists of three main parts:
+* A page with an Adyen Web integration (`/adyen`)
+* A recurring scraping process which generates encrypted card details and writes them to a file using [Puppeteer](https://pptr.dev/)
+* A route which returns the latest encrypted card details (`/card-details`)
