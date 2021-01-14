@@ -5,7 +5,7 @@ const logger = require('./util/logger');
 
 const adyenData = [
   { selector: '#encryptedCardNumber', value: '2223000048410010' },
-  { selector: '#encryptedExpiryDate', value: '10/20' },
+  { selector: '#encryptedExpiryDate', value: '03/30' },
   { selector: '#encryptedSecurityCode', value: '737' },
 ];
 
